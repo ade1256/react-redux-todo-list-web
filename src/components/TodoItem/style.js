@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
 export const TodoItemWrapper = styled.li`
-  margin: 0 -3rem 4px;
-  padding: 1.1rem 3rem;
+  margin-bottom: 18px;
+  padding: 16px 32px;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 8px;
   &:hover {
     background: rgba(255, 255, 255, 0.25);
   }

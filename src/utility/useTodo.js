@@ -1,8 +1,9 @@
+import moment from 'moment'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { v4 } from 'uuid'
 
 const useTodos = (initialValue = [], localStorageKey = 'todos') => {
-  const [filterValue, setFilterValue] = useState('All')
+  const [filterValue, setFilterValue] = useState('Todo')
   const [todos, setTodos] = useState(() => {
     try {
       const item = window.localStorage.getItem(localStorageKey)
@@ -20,7 +21,8 @@ const useTodos = (initialValue = [], localStorageKey = 'todos') => {
         id: v4(),
         title: todoContent.title,
         description: todoContent.description,
-        status: 0
+        status: 0,
+        date: moment().format("DD/MM/YYYY HH:mm"),
       },
       ...todos
     ])
@@ -32,7 +34,8 @@ const useTodos = (initialValue = [], localStorageKey = 'todos') => {
       return {
         ...todo,
         title: newContent.title,
-        description: newContent.description
+        description: newContent.description,
+        date: moment().format("DD/MM/YYYY HH:mm"),
       }
     }))
   }, [todos])
@@ -42,10 +45,12 @@ const useTodos = (initialValue = [], localStorageKey = 'todos') => {
       if (todo.id !== id) return todo
       return {
         ...todo,
-        status: todo.status === 0 ? 1 : 0
+        status: todo.status === 0 ? 1 : 0,
+        date: moment().format("DD/MM/YYYY HH:mm")
       }
     }))
   }, [todos])
+  
 
   const handleDeleteTodo = useCallback((id) => {
     setTodos(todos.filter((todo) => todo.id !== id))
@@ -53,7 +58,6 @@ const useTodos = (initialValue = [], localStorageKey = 'todos') => {
   
   const filterTodos = useMemo(() => {
     const options = {
-      All: todo => todo,
       Done: todo => todo.status === 1,
       Todo: todo => todo.status === 0
     }

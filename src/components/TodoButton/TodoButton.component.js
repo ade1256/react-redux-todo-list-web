@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { Button, FilterBtnWrapper } from "./style"
 
 const TodoButtonComponent = ({ filterValue, setFilter }) => {
-  const btnList = useRef(['All', 'Done', 'Todo'])
+  const btnList = useRef(['Todo', 'Done'])
 
   return (
     <FilterBtnWrapper>

@@ -48,15 +48,20 @@ const TodoItemComponent = ({ todo, editing, setEditing, updateTodo, changeDoneTo
         <TodoEditing/> :
         <>
           <TodoItemContent  isDone={todo.status === 1}>
+            <p>{todo.date}</p>
             <h3>{ todo.title }</h3>
             <p>{ todo.description}</p>
           </TodoItemContent>
           <TodoItemAction>
-            <button onClick={ handleSetEdit }><i className="fa fa-edit"></i></button>
-            <button onClick={ handleChangeDone }>
+            {
+              todo.status === 0 ? <button onClick={ handleSetEdit }><i className="fa fa-edit"></i></button> : <></>
+            }
+            <button onClick={ todo.status === 0 ? handleChangeDone : null }>
               <i className={`fa ${todo.status === 1 ? 'fa-check-square' : 'fa-square'}`}></i>
             </button>
-            <button onClick={ handleDeleteTodo }><i className="fa fa-trash"></i></button>
+            {
+              todo.status === 0 ? <button onClick={ handleDeleteTodo }><i className="fa fa-trash"></i></button> : <></>
+            }
           </TodoItemAction>
         </>
       }

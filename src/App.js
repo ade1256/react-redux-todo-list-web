@@ -58,7 +58,7 @@ function App() {
     <Container>
       <Header>
         <h1>Todo List
-          <span>Todo List</span>
+          <span>Daftar list todo pengingat kegiatan</span>
         </h1>
       </Header>
       <Todo />
